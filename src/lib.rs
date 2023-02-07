@@ -47,6 +47,15 @@ mod tests {
     }
 
     #[test]
+    fn long() {
+        let x: Vec<f64> = (0..1_000_001).map(f64::from).collect();
+        let y: Vec<f64> = x.iter().map(|x| x.sin()).collect();
+
+        let result = simpson(&y, &x).unwrap();
+        assert_eq!(result.floor(), 0.0);
+    }
+
+    #[test]
     fn unequal_vec() {
         let y = vec![0.0_f64, 1.0_f64, 2.0_f64, 3.0_f64];
         let x = vec![0.0_f64, 1.0_f64, 2.0_f64];
